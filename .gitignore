@@ -1,0 +1,16 @@
+*.vcxproj
+*.filters
+CMakeCache.txt
+*.sdf
+*.sln
+*.opendb
+.vs
+mcme.dir
+Debug
+Release
+Win32
+bin
+CMakeFiles
+cmake_install.cmake
+*.mca
+obj
