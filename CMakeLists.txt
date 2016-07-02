@@ -8,9 +8,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_CXX_FLAGS "-Wall -O3")
 set (MCME_SOURCES
-  src/map.c
   src/test.c
-  src/slist.c)
+  src/slist.c
+  src/nbt.c)
 set (MCME_DEPENDENCIES
   zlib)
 set (MCME_INCLUDES

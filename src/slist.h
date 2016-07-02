@@ -13,5 +13,7 @@ typedef struct slist {
 } slist;
 
 int slist_init(slist *list);
-int slist_push_back(slist *list, void *data);
+int slist_push(slist *list, void *data);
+void *slist_pop(slist *list);
+void *slist_top(slist *list);
 void slist_destroy(slist *list);

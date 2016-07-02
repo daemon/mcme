@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <wchar.h>
+#include "err.h"
 #include "slist.h"
 
 #define NBT_TAG_END         0
@@ -59,4 +60,19 @@ typedef struct nbt_tag {
   };
 } nbt_tag;
 
-int parse_nbt(nbt_tag *out, char *buf, size_t size);
+typedef enum reader_state reader_state;
+
+typedef struct nbt_reader {
+  char buffer[4096];
+  int buf_size;
+  slist tag_stack;
+  reader_state state;
+} nbt_reader;
+
+int nbt_parse(MCME_OUT nbt_tag *tag, char *buf, size_t size);
+int nbt_read_file(MCME_OUT nbt_tag *tag, const char *name);
+int nbt_reader_init(nbt_reader *reader);
+int nbt_reader_put(nbt_reader *reader, char *data, size_t size);
+int nbt_reader_finish(nbt_reader *reader, MCME_OUT nbt_tag *tag);
+void nbt_reader_destroy(nbt_reader *reader);
+void nbt_tag_destroy(nbt_tag *tag);

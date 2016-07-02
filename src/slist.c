@@ -10,7 +10,7 @@ int slist_init(slist *list) {
   return MCME_SUCCESS;
 }
 
-int slist_push_back(slist *list, void *data) {
+int slist_push(slist *list, void *data) {
   if (!list->size) {
     list->start->data = data;
     list->start->next = NULL;
@@ -32,6 +32,28 @@ int slist_push_back(slist *list, void *data) {
   list->last = list->last->next;
   ++list->size;
   return MCME_SUCCESS;
+}
+
+void *slist_pop(slist *list) {
+  if (!list->size)
+    return NULL;
+  void *last = list->last->data;
+  if (!(list->size & (list->size - 1)) && list->size > 4) {
+    list->last = list->last->prev;
+    free(list->last->next);
+    list->last->next = NULL;
+  } else {
+    list->last = list->last->prev;
+    list->last->next = NULL;
+  }
+
+  return last;
+}
+
+void *slist_top(slist *list) {
+  if (!list->size)
+    return NULL;
+  return list->last->data;
 }
 
 void slist_destroy(slist *list) {
